@@ -68,5 +68,81 @@ classdef Monomial1D < BasisSet
             d2phi = (r.^((1:obj.N)-3))'.*((1:obj.N)'-1).*((1:obj.N)'-2); % return NxR vec of each func evaluated at r
             d2phi(isnan(d2phi))=0; % Correct for error near r=0
         end
+
+        %% Function to compute the overlap integrals between Monomial1D sets 
+        %       j and variable i between lb and ub bounds. The object 
+        %       will pick the appropriate number of qp points based on 
+        %       each individual variables' requirements. 
+        %
+        %       overlap = integral{ rhs_obj.phi(r)' * lhs_obj.phi(r) * dV }
+        %
+        %   @param rhs_obj Right-hand side Monomial1D object
+        %   @param lhs_obj Left-hand side Monomial1D object 
+        %   @param lb 1xd vector of lower bounds (where d is dimension)
+        %   @param ub 1xd vector of upper bounds (where d is dimension)
+        function overlap = integral_x_phi(rhs_obj, lhs_obj, lb, ub)
+            arguments
+                rhs_obj (1,1) {mustBeA(rhs_obj,'Monomial1D')}
+                lhs_obj (1,1) {mustBeA(lhs_obj,'Monomial1D')}
+                lb (1,1) {mustBeNumeric}
+                ub (1,1) {mustBeNumeric}
+            end
+
+            Nj = (1:length(rhs_obj.get_coeff()))';
+            Ni = 1:length(lhs_obj.get_coeff());
+            overlap = ((ub.^(Nj+Ni-1)) - (lb.^(Nj+Ni-1)))./(Nj+Ni-1);
+        end
+
+        %% Function to compute the overlap integral with gradients between Monomial1D sets 
+        %       j and variable i between lb and ub bounds. The object 
+        %       will pick the appropriate number of qp points based on 
+        %       each individual variables' requirements. 
+        %
+        %       overlap = integral{ rhs_obj.phi(r)' * lhs_obj.dphi(r) * dV }
+        %
+        %   @param rhs_obj Right-hand side Monomial1D object
+        %   @param lhs_obj Left-hand side Monomial1D object 
+        %   @param lb 1xd vector of lower bounds (where d is dimension)
+        %   @param ub 1xd vector of upper bounds (where d is dimension)
+        function overlap = integral_x_dphi(rhs_obj, lhs_obj, lb, ub)
+            arguments
+                rhs_obj (1,1) {mustBeA(rhs_obj,'Monomial1D')}
+                lhs_obj (1,1) {mustBeA(lhs_obj,'Monomial1D')}
+                lb (1,1) {mustBeNumeric}
+                ub (1,1) {mustBeNumeric}
+            end
+
+            Nj = (1:length(rhs_obj.get_coeff()))';
+            Ni = 1:length(lhs_obj.get_coeff());
+            overlap = ((ub.^(Nj+Ni-2)) - (lb.^(Nj+Ni-2)))./(Nj+Ni-2).*(Ni-1);
+            % Correct for NaN
+            overlap(isnan(overlap))=0;
+        end
+
+        %% Function to compute the overlap integral with laplacian between Monomial1D sets 
+        %       j and variable i between lb and ub bounds. The object 
+        %       will pick the appropriate number of qp points based on 
+        %       each individual variables' requirements. 
+        %
+        %       overlap = integral{ rhs_obj.phi(r)' * lhs_obj.d2phi(r) * dV }
+        %
+        %   @param rhs_obj Right-hand side Monomial1D object
+        %   @param lhs_obj Left-hand side Monomial1D object 
+        %   @param lb 1xd vector of lower bounds (where d is dimension)
+        %   @param ub 1xd vector of upper bounds (where d is dimension)
+        function overlap = integral_x_d2phi(rhs_obj, lhs_obj, lb, ub)
+            arguments
+                rhs_obj (1,1) {mustBeA(rhs_obj,'Monomial1D')}
+                lhs_obj (1,1) {mustBeA(lhs_obj,'Monomial1D')}
+                lb (1,1) {mustBeNumeric}
+                ub (1,1) {mustBeNumeric}
+            end
+
+            Nj = (1:length(rhs_obj.get_coeff()))';
+            Ni = 1:length(lhs_obj.get_coeff());
+            overlap = ((ub.^(Nj+Ni-3)) - (lb.^(Nj+Ni-3)))./(Nj+Ni-3).*(Ni-1).*(Ni-2);
+            % Correct for NaN
+            overlap(isnan(overlap))=0;
+        end
     end
 end

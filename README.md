@@ -3,6 +3,10 @@
 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=aladshaw3/variational_galerkin_lagrange_method)
 
+**WARNING**: Page is a WIP
+
+Narrow scope to all variables using same basis sets...
+
 ## Variational Galerkin-Lagrange Method
 Repository for Matlab scripts for a variation on a Galerkin's method for 
 PDEs/ODEs utilizing Lagrangian multipliers to enforce system boundary conditions. 

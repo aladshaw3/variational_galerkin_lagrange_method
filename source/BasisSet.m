@@ -110,5 +110,14 @@ classdef BasisSet < handle
         phi(obj,r) % NxR matrix of N basis func at R pos
         dphi(obj,r) % NxR matrix of N derivatives of func at R pos
         d2phi(obj,r) % NxR matrix of N 2nd derivatives of func at R pos
+
+        % NjxNi Overlap integral with phi (where Nj=size of rhs_obj and Ni=size of lhs_obj)
+        integral_x_phi(rhs_obj, lhs_obj, lb, ub); 
+
+        % NjxNi Overlap integral with dphi (where Nj=size of rhs_obj and Ni=size of lhs_obj)
+        integral_x_dphi(rhs_obj, lhs_obj, lb, ub); 
+
+        % NjxNi Overlap integral with dphi (where Nj=size of rhs_obj and Ni=size of lhs_obj)
+        integral_x_d2phi(rhs_obj, lhs_obj, lb, ub);
     end
 end

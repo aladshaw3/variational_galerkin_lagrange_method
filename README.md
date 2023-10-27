@@ -5,6 +5,9 @@
 
 **WARNING**: Page is a WIP
 
+**NOTE**: Planning to require Matlab 2023b to use new `ode` object for 
+object-oriented solver configs and selection. 
+
 Narrow scope to all variables using same basis sets...
 
 ## Variational Galerkin-Lagrange Method

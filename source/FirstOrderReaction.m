@@ -8,7 +8,7 @@ classdef FirstOrderReaction < PhysicsResidual
             arguments
                 lb (1,:) {mustBeNumeric} = 0
                 ub (1,:) {mustBeNumeric} = 1
-                val (1,1) {mustBePositive} = 1
+                val (1,1) {mustBeNumeric} = 1
             end
             obj = obj@PhysicsResidual(lb, ub);
             obj.k = val;

@@ -34,7 +34,10 @@ funop = @(x) diffreact(x,vset,diff,react,bc1,bc1_r,bc2,bc2_r);
 % Alternative using fminsearch 
 x = fminsearch(funop,[0;0;0;0;0]);
 
+u_approx = u.u(x_span);
 
+% Assert less than 5% error
+assert( norm(u_exact-u_approx)/norm(u_exact) < 0.05 )
 
 % Helper function for residuals
 function Ax = diffreact(x,vset,diff,react,bc1,bc1_r,bc2,bc2_r)

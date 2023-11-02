@@ -22,6 +22,7 @@ diff = Diffusion(lb,ub,D);
 Res = diff.eval(u1,u2,c_2);
 Res2 = diff.eval(u1,u1,c_1);
 Res3 = diff.eval(u2,u1,c_1);
+Res4 = diff.eval(u2,u2,c_2);
 
 ol = -D*(vset.get_variable('u1').integral_x_d2phi(u2, 0, 1) * c_2);
 

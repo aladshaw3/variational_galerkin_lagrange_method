@@ -44,7 +44,7 @@ funop = @(x) coupleddiffreact(x,vset,diff1,react1,bc1_1,bc1_1r,bc2_1,bc2_1r,...
                                     diff2,react2,bc1_2,bc1_2r,bc2_2,bc2_2r);
 
 % Alternative using fminsearch 
-options = optimset('MaxFunEvals',100000,'Display','iter','MaxIter',10000,'TolFun',1e-14,'TolX',1e-14);
+options = optimset('MaxFunEvals',100000,'Display','iter','MaxIter',10000,'TolFun',1e-16,'TolX',1e-16);
 x = fminsearch(funop,[0;0;0;0;0;0;0;0;0;0;0;0],options);
 
 u1_approx = u1.u(x_span);

@@ -14,8 +14,8 @@ c = vset.get_variable_coefficients('u');
 % temporary storage of Lagrangian multipliers
 l = [0;0];
 
-D = 0.5;
-k = 2;
+D = 1;
+k = 1;
 L = 1;
 uo = 1;
 diff = Diffusion(0,L,D);

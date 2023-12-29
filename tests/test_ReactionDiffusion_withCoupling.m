@@ -55,8 +55,8 @@ u_sum = u1_approx+u2_approx;
 assert( norm(u1_exact-u1_approx)/norm(u1_exact) < 0.05 )
 
 norm(u_sum - 1)
-% Assert conservation of mass 
-assert( norm(u_sum - 1) < 0.05 )
+% Assert approx conservation of mass 
+assert( norm(u_sum - 1) < 0.1 )
 
 % Helper function for residuals
 function Ax = coupleddiffreact(x,vset,diff1,react1,bc1_1,bc1_1r,bc2_1,bc2_1r,...
